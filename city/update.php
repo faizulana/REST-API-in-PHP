@@ -7,16 +7,14 @@ include_once '/home/milana/backend/rest api/config/database.php';
 include_once '/home/milana/backend/rest api/models/city.php';
 
 
-$database = new Database($host = $hostname, $db_name = $database, $username = $user, $password = $pass);
+$database = new Database();
 $db = $database->getConnection();
 
 $city = new City($db);
 
-$data = json_decode(file_get_contents("php://input"));
+$city->id = $_POST['id'];
 
-$city->id = $data->id;
-
-$city->cityname = $data->cityname;
+$city->cityname = $_POST['cityname'];
 
 if ($city->update()) {
     http_response_code(200);

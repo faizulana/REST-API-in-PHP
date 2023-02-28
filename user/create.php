@@ -7,21 +7,20 @@ header("Access-Control-Allow-Methods: POST");
 include_once '/home/milana/backend/rest api/config/database.php';
 include_once '/home/milana/backend/rest api/models/user.php';
 
-$database = new Database($host = $hostname, $db_name = $database, $username = $user, $password = $pass);
+$database = new Database();
 $db = $database->getConnection();
 
 $user = new User($conn = $db);
 
-$data = json_decode(file_get_contents("php://input"));
 if (
-    !empty($data->name) &&
-    !empty($data->username) &&
-    !empty($data->city_id)
+    !empty($_POST['username']) &&
+    !empty($_POST['name']) &&
+    !empty($_POST['city_id'])
 ) {
 
-    $user->name = $data->name;
-    $user->city_id = $data->city_id;
-    $user->username = $data->username;
+    $user->name = $_POST['name'];
+    $user->city_id = $_POST['city_id'];
+    $user->username = $_POST['username'];
 
 
     if ($user->create()) {

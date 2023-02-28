@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '/home/milana/backend/rest api/config/database.php';
 include_once '/home/milana/backend/rest api/models/city.php';
 
-$database = new Database($host = $hostname, $db_name = $database, $username = $user, $password = $pass);
+$database = new Database();
 $db = $database->getConnection();
 
 $city = new City($db);
@@ -26,7 +26,7 @@ if ($num > 0) {
 
         $city_item = array(
             "id" => $id,
-            "name" => $name,
+            "cityname" => $cityname,
         );
 
         $city_arr["items"][] = $city_item;

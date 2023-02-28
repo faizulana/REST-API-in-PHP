@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '/home/milana/backend/rest api/config/database.php';
 include_once '/home/milana/backend/rest api/models/user.php';
 
-$database = new Database($host = $hostname, $db_name = $database, $username = $user, $password = $pass);
+$database = new Database();
 $db = $database->getConnection();
 
 $user = new User($db);

@@ -4,11 +4,6 @@ require '/home/milana/backend/rest api/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$pass = $_ENV['MYSQL_PASSWORD'];
-$user = $_ENV['MYSQL_USER'];
-$database = $_ENV['DATABASE_NAME'];
-$hostname = $_ENV['MYSQL_HOST'];
-
 class Database
 {
         private string $host;
@@ -16,11 +11,11 @@ class Database
         private string $username;
         private string $password;
         public ?PDO $conn = null;
-        public function __construct($host, $db_name, $username, $password) {
-            $this->host = $host;
-            $this->db_name = $db_name;
-            $this->username = $username;
-            $this->password = $password;
+        public function __construct() {
+            $this->host = $_ENV['MYSQL_HOST'];
+            $this->db_name = $_ENV['DATABASE_NAME'];
+            $this->username = $_ENV['MYSQL_USER'];;
+            $this->password = $_ENV['MYSQL_PASSWORD'];
         }
         public function getConnection(): ?PDO
     {

@@ -7,18 +7,17 @@ include_once '/home/milana/backend/rest api/config/database.php';
 include_once '/home/milana/backend/rest api/models/user.php';
 
 
-$database = new Database($host = $hostname, $db_name = $database, $username = $user, $password = $pass);
+$database = new Database();
 $db = $database->getConnection();
 
 $user = new User($db);
 
-$data = json_decode(file_get_contents("php://input"));
+$user->id = $_POST['id'];
 
-$user->id = $data->id;
+$user->name = $_POST['name'];
+$user->username = $_POST['username'];
+$user->city_id = $_POST['city_id'];
 
-$user->name = $data->name;
-$user->username = $data->username;
-$user->city_id = $data->city_id;
 
 if ($user->update()) {
     http_response_code(200);

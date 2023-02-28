@@ -7,14 +7,12 @@ header("Access-Control-Allow-Methods: POST");
 include_once '/home/milana/backend/rest api/config/database.php';
 include_once '/home/milana/backend/rest api/models/user.php';
 
-$database = new Database($host = $hostname, $db_name = $database, $username = $user, $password = $pass);
+$database = new Database();
 $db = $database->getConnection();
 
 $user = new User($db);
 
-$data = json_decode(file_get_contents("php://input"));
-
-$user->id = $data->id;
+$user->id = $_POST['id'];
 
 if ($user->delete()) {
     http_response_code(200);
